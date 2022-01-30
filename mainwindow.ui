@@ -58,6 +58,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btnLine">
+         <property name="text">
+          <string>Line</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

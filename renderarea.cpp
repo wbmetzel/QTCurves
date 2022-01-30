@@ -46,8 +46,15 @@ void RenderArea::on_shape_changed()
         mIntervalLength = 2 * M_PI;
         mStepCount = 256;
         break;
-    default:
-
+    case Line:
+        mScale = 70;
+        mIntervalLength = 1; // Arbitrary number
+        mStepCount = 128;
+        break;
+    default: // Default to astroid for now
+        mScale = 40;
+        mIntervalLength = 2 * M_PI;
+        mStepCount = 256;
         break;
     }
 }
@@ -67,6 +74,9 @@ QPointF RenderArea::compute(float t)
         break;
     case HypoCycloid:
         return compute_hypo(t);
+        break;
+    case Line:
+        return compute_line(t);
         break;
     default:
         break;
@@ -107,6 +117,11 @@ QPointF RenderArea::compute_hypo(float t)
                 1.5 * (2 * cos(t) + cos(2 * t)),
                 1.5 * (2 * sin(t) - sin(2 * t))
     );
+}
+
+QPointF RenderArea::compute_line(float t)
+{
+    return QPointF(1 - t, 1 - t);
 }
 
 void RenderArea::paintEvent(QPaintEvent *event)

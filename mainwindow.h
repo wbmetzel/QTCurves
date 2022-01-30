@@ -24,6 +24,8 @@ private slots:
 
     void on_btnHypo_clicked();
 
+    void on_btnLine_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
