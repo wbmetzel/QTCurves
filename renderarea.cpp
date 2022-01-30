@@ -32,13 +32,19 @@ void RenderArea::on_shape_changed()
         mStepCount = 256;
         break;
     case Cycloid:
-
+        mScale = 4;
+        mIntervalLength = 6 * M_PI;
+        mStepCount = 128;
         break;
     case HuygensCycloid:
-
+        mScale = 4;
+        mIntervalLength = 4 * M_PI;
+        mStepCount = 256;
         break;
     case HypoCycloid:
-
+        mScale = 15;
+        mIntervalLength = 2 * M_PI;
+        mStepCount = 256;
         break;
     default:
 
@@ -68,6 +74,7 @@ QPointF RenderArea::compute(float t)
     return QPointF(0,0);
 }
 
+// Parametric equations
 QPointF RenderArea::compute_astroid(float t)
 {
     float cos_t = cos(t);
@@ -80,32 +87,26 @@ QPointF RenderArea::compute_astroid(float t)
 
 QPointF RenderArea::compute_cycloid(float t)
 {
-    float cos_t = cos(t);
-    float sin_t = sin(t);
-    float X = 2 * cos_t * cos_t * cos_t;
-    float Y = 2 * sin_t * sin_t * sin_t;
-
-    return QPointF(X,Y);
+    return QPointF(
+                1.5 * (1 - cos(t)),
+                1.5 * (t - sin(t))
+    );
 }
 
 QPointF RenderArea::compute_huygens(float t)
 {
-    float cos_t = cos(t);
-    float sin_t = sin(t);
-    float X = 2 * cos_t * cos_t * cos_t;
-    float Y = 2 * sin_t * sin_t * sin_t;
-
-    return QPointF(X,Y);
+    return QPointF(
+                4 * (3 * cos(t) - cos(3 * t)),
+                4 * (3 * sin(t) - sin(3 * t))
+    );
 }
 
 QPointF RenderArea::compute_hypo(float t)
 {
-    float cos_t = cos(t);
-    float sin_t = sin(t);
-    float X = 2 * cos_t * cos_t * cos_t;
-    float Y = 2 * sin_t * sin_t * sin_t;
-
-    return QPointF(X,Y);
+    return QPointF(
+                1.5 * (2 * cos(t) + cos(2 * t)),
+                1.5 * (2 * sin(t) - sin(2 * t))
+    );
 }
 
 void RenderArea::paintEvent(QPaintEvent *event)
