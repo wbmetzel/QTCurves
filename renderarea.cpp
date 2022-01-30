@@ -8,7 +8,7 @@ RenderArea::RenderArea(QWidget *parent) :
     mShapeColor (255, 255, 255),
     mShape (Astroid)
 {
-
+    on_shape_changed();
 }
 
 
@@ -22,7 +22,83 @@ QSize RenderArea::sizeHint() const
     return QSize(400, 200);
 }
 
+void RenderArea::on_shape_changed()
+{
+    switch(mShape)
+    {
+    case Astroid:
+        mScale = 40;
+        mIntervalLength = 2 * M_PI;
+        mStepCount = 256;
+        break;
+    case Cycloid:
+
+        break;
+    case HuygensCycloid:
+
+        break;
+    case HypoCycloid:
+
+        break;
+    default:
+
+        break;
+    }
+}
+
+QPointF RenderArea::compute(float t)
+{
+    switch(mShape)
+    {
+    case Astroid:
+        return compute_astroid(t);
+        break;
+    case Cycloid:
+        return compute_cycloid(t);
+        break;
+    case HuygensCycloid:
+        return compute_huygens(t);
+        break;
+    case HypoCycloid:
+        return compute_hypo(t);
+        break;
+    default:
+        break;
+    }
+    return QPointF(0,0);
+}
+
 QPointF RenderArea::compute_astroid(float t)
+{
+    float cos_t = cos(t);
+    float sin_t = sin(t);
+    float X = 2 * cos_t * cos_t * cos_t;
+    float Y = 2 * sin_t * sin_t * sin_t;
+
+    return QPointF(X,Y);
+}
+
+QPointF RenderArea::compute_cycloid(float t)
+{
+    float cos_t = cos(t);
+    float sin_t = sin(t);
+    float X = 2 * cos_t * cos_t * cos_t;
+    float Y = 2 * sin_t * sin_t * sin_t;
+
+    return QPointF(X,Y);
+}
+
+QPointF RenderArea::compute_huygens(float t)
+{
+    float cos_t = cos(t);
+    float sin_t = sin(t);
+    float X = 2 * cos_t * cos_t * cos_t;
+    float Y = 2 * sin_t * sin_t * sin_t;
+
+    return QPointF(X,Y);
+}
+
+QPointF RenderArea::compute_hypo(float t)
 {
     float cos_t = cos(t);
     float sin_t = sin(t);
@@ -37,25 +113,6 @@ void RenderArea::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
-    switch(mShape)
-    {
-    case Astroid:
-        mBackgroundColor = Qt::red;
-        break;
-    case Cycloid:
-        mBackgroundColor = Qt::green;
-        break;
-    case HuygensCycloid:
-        mBackgroundColor = Qt::blue;
-        break;
-    case HypoCycloid:
-        mBackgroundColor = Qt::yellow;
-        break;
-    default:
-        mBackgroundColor = Qt::gray;
-        break;
-    }
-
     painter.setBrush(mBackgroundColor);
     painter.setPen(mShapeColor);
 
@@ -63,17 +120,14 @@ void RenderArea::paintEvent(QPaintEvent *event)
     painter.drawRect(this->rect());
 
     QPoint center = this->rect().center();
-    int stepCount = 256;
-    float scale = 40;
-    float intervalLength = 2 * M_PI;
-    float step = intervalLength / stepCount;
-    for(float t = 0; t < intervalLength; t += step)
+    float step = mIntervalLength / mStepCount;
+    for(float t = 0; t < mIntervalLength; t += step)
     {
-        QPointF point = compute_astroid(t);
+        QPointF point = compute(t);
 
         QPoint pixel;
-        pixel.setX(point.x() * scale + center.x());
-        pixel.setY(point.y() * scale + center.y());
+        pixel.setX(point.x() * mScale + center.x());
+        pixel.setY(point.y() * mScale + center.y());
 
         painter.drawPoint(pixel);
     }
