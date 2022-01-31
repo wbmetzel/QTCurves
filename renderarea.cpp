@@ -56,6 +56,11 @@ void RenderArea::on_shape_changed()
         mIntervalLength = 2 * M_PI;
         mStepCount = 128;
         break;
+    case Ellipse:
+        mScale = 75;
+        mIntervalLength = 2 * M_PI;
+        mStepCount = 256;
+        break;
     default: // Default to astroid for now
         mScale = 40;
         mIntervalLength = 2 * M_PI;
@@ -85,6 +90,9 @@ QPointF RenderArea::compute(float t)
         break;
     case Circle:
         return compute_circle(t);
+        break;
+    case Ellipse:
+        return compute_ellipse(t);
         break;
     default:
         break;
@@ -132,9 +140,25 @@ QPointF RenderArea::compute_line(float t)
     return QPointF(1 - t, 1 - t);
 }
 
-QPointF RenderArea:: compute_circle(float t)
+/*
+ * Shape: Circle
+ * Equation: x = cos(t), y = sin(t)
+ */
+QPointF RenderArea::compute_circle(float t)
 {
     return QPointF(cos(t), sin(t));
+}
+
+/*
+ * Shape: Ellipse
+ * Equation: x = (a)*cos(t), y = (b)*sin(t)
+ */
+QPointF RenderArea::compute_ellipse(float t)
+{
+    // Arbitrary values hardcoded for a,b
+    float a = 2;
+    float b = 1.1;
+    return QPointF(a * cos(t), b * sin(t));
 }
 
 void RenderArea::paintEvent(QPaintEvent *event)
