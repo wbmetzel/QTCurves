@@ -72,6 +72,16 @@ void RenderArea::on_shape_changed()
         mIntervalLength = 6 * M_PI;
         mStepCount = 256;
         break;
+    case Cloud:
+        mScale = 10;
+        mIntervalLength = 28 * M_PI;
+        mStepCount = 128;
+        break;
+    case InvertedCloud:
+        mScale = 10;
+        mIntervalLength = 28 * M_PI;
+        mStepCount = 128;
+        break;
     default: // Default to astroid for now
         mScale = 40;
         mIntervalLength = 2 * M_PI;
@@ -110,6 +120,12 @@ QPointF RenderArea::compute(float t)
         break;
     case Star:
         return compute_star(t);
+        break;
+    case Cloud:
+        return compute_cloud(t,-1);
+        break;
+    case InvertedCloud:
+        return compute_cloud(t,1);
         break;
     default:
         break;
@@ -213,6 +229,23 @@ QPointF RenderArea::compute_star(float t)
     return QPointF(
        (R - r) * cos(t) + d * cos( ((R - r) / r ) * t ),
        (R - r) * sin(t) - d * sin( ((R - r) / r ) * t )
+    );
+}
+
+/*
+ * Shape: Cloud
+ * Equation:
+ *   x = (a + b) * cos(t * (b/a)) + b * cos( ((a + b) / a ) * t )
+ *   y = (a + b) * sin(t * (b/a)) - b * sin( ((a + b) / a ) * t )
+ */
+QPointF RenderArea::compute_cloud(float t, int sign)
+{
+    float a = 14.0;
+    float b = 1.0;
+
+    return QPointF(
+       (a + b) * cos(t * (b/a)) + sign * b * cos( ((a + b) / a ) * t ),
+       (a + b) * sin(t * (b/a)) - b * sin( ((a + b) / a ) * t )
     );
 }
 

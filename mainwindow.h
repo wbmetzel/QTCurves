@@ -44,6 +44,10 @@ private slots:
 
     void on_btnStar_clicked();
 
+    void on_btnCloud_clicked();
+
+    void on_btnInvertedCloud_clicked();
+
 private:
     Ui::MainWindow *ui;
 

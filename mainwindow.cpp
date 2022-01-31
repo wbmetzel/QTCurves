@@ -105,6 +105,22 @@ void MainWindow::on_btnStar_clicked()
     update_ui();
 }
 
+void MainWindow::on_btnCloud_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Cloud);
+    this->ui->renderArea->repaint();
+
+    update_ui();
+}
+
+void MainWindow::on_btnInvertedCloud_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::InvertedCloud);
+    this->ui->renderArea->repaint();
+
+    update_ui();
+}
+
 void MainWindow::on_spinScale_valueChanged(double scale)
 {
     this->ui->renderArea->setScale(scale);
