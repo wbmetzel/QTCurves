@@ -114,7 +114,7 @@
       <item>
        <widget class="QPushButton" name="btnStar">
         <property name="text">
-         <string>Star</string>
+         <string>Hypotrochoid</string>
         </property>
        </widget>
       </item>
@@ -129,6 +129,13 @@
        <widget class="QPushButton" name="btnInvertedCloud">
         <property name="text">
          <string>Inverted Cloud</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnCardioid">
+        <property name="text">
+         <string>Cardioid</string>
         </property>
        </widget>
       </item>

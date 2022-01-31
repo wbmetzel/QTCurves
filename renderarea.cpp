@@ -82,6 +82,11 @@ void RenderArea::on_shape_changed()
         mIntervalLength = 28 * M_PI;
         mStepCount = 128;
         break;
+    case Cardioid:
+        mScale = 10;
+        mIntervalLength = 2 * M_PI;
+        mStepCount = 256;
+        break;
     default: // Default to astroid for now
         mScale = 40;
         mIntervalLength = 2 * M_PI;
@@ -126,6 +131,9 @@ QPointF RenderArea::compute(float t)
         break;
     case InvertedCloud:
         return compute_cloud(t,1);
+        break;
+    case Cardioid:
+        return compute_cardioid(t);
         break;
     default:
         break;
@@ -247,6 +255,20 @@ QPointF RenderArea::compute_cloud(float t, int sign)
        (a + b) * cos(t * (b/a)) + sign * b * cos( ((a + b) / a ) * t ),
        (a + b) * sin(t * (b/a)) - b * sin( ((a + b) / a ) * t )
     );
+}
+
+/*
+ * Shape: Cardioid
+ * Equation:
+ *   x = -16sin^3(t)
+ *   y = -13cos(t) + 5cos(2t) + 2cos(3t) + cos(4t)
+ */
+QPointF RenderArea::compute_cardioid(float t)
+{
+    float x = -16 * pow(sin(t),3);
+    float y = -13 * cos(t) + 5 * cos(2 * t) + 2 * cos(3 * t) + cos(4 * t);
+
+    return QPointF(x,y);
 }
 
 void RenderArea::paintEvent(QPaintEvent *event)

@@ -48,6 +48,8 @@ private slots:
 
     void on_btnInvertedCloud_clicked();
 
+    void on_btnCardioid_clicked();
+
 private:
     Ui::MainWindow *ui;
 

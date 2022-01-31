@@ -25,7 +25,8 @@ public:
         Flower,
         Star,
         Cloud,
-        InvertedCloud
+        InvertedCloud,
+        Cardioid
     };
 
     void setBackgroundColor(QColor color) { mBackgroundColor = color; }
@@ -63,6 +64,7 @@ private:
     QPointF compute_flower(float t);
     QPointF compute_star(float t);
     QPointF compute_cloud(float t, int sign);
+    QPointF compute_cardioid(float t);
 
     QColor mBackgroundColor;
     QPen mPen;

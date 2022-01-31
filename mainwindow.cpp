@@ -121,6 +121,14 @@ void MainWindow::on_btnInvertedCloud_clicked()
     update_ui();
 }
 
+void MainWindow::on_btnCardioid_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Cardioid);
+    this->ui->renderArea->repaint();
+
+    update_ui();
+}
+
 void MainWindow::on_spinScale_valueChanged(double scale)
 {
     this->ui->renderArea->setScale(scale);
