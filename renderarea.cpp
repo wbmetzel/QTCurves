@@ -27,13 +27,13 @@ void RenderArea::on_shape_changed()
     switch(mShape)
     {
     case Astroid:
-        mScale = 40;
+        mScale = 90;
         mIntervalLength = 2 * M_PI;
         mStepCount = 256;
         break;
     case Cycloid:
-        mScale = 4;
-        mIntervalLength = 6 * M_PI;
+        mScale = 10;
+        mIntervalLength = 4 * M_PI;
         mStepCount = 128;
         break;
     case HuygensCycloid:
@@ -42,13 +42,18 @@ void RenderArea::on_shape_changed()
         mStepCount = 256;
         break;
     case HypoCycloid:
-        mScale = 15;
+        mScale = 40;
         mIntervalLength = 2 * M_PI;
         mStepCount = 256;
         break;
     case Line:
-        mScale = 70;
-        mIntervalLength = 1; // Arbitrary number
+        mScale = 100;
+        mIntervalLength = 2; // Arbitrary number
+        mStepCount = 128;
+        break;
+    case Circle:
+        mScale = 100;
+        mIntervalLength = 2 * M_PI;
         mStepCount = 128;
         break;
     default: // Default to astroid for now
@@ -77,6 +82,9 @@ QPointF RenderArea::compute(float t)
         break;
     case Line:
         return compute_line(t);
+        break;
+    case Circle:
+        return compute_circle(t);
         break;
     default:
         break;
@@ -124,8 +132,16 @@ QPointF RenderArea::compute_line(float t)
     return QPointF(1 - t, 1 - t);
 }
 
+QPointF RenderArea:: compute_circle(float t)
+{
+    return QPointF(cos(t), sin(t));
+}
+
 void RenderArea::paintEvent(QPaintEvent *event)
 {
+    // ! TODO: For future use...
+    Q_UNUSED(event);
+
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 

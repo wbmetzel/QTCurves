@@ -36,6 +36,8 @@ private slots:
 
     void on_btnLineColor_clicked();
 
+    void on_btnCircle_clicked();
+
 private:
     Ui::MainWindow *ui;
 
