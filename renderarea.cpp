@@ -151,6 +151,10 @@ QPointF RenderArea::compute_hypo(float t)
     );
 }
 
+/*
+ * Shape: Line
+ * Equation: x = 1 - t, y = 1 - t
+ */
 QPointF RenderArea::compute_line(float t)
 {
     return QPointF(1 - t, 1 - t);
@@ -244,5 +248,9 @@ void RenderArea::paintEvent(QPaintEvent *event)
         painter.drawLine(pixel, prevPixel);
         prevPixel = pixel;
     }
-
+    QPointF point = compute(mIntervalLength);
+    QPoint pixel;
+    pixel.setX(point.x() * mScale + center.x());
+    pixel.setY(point.y() * mScale + center.y());
+    painter.drawLine(pixel, prevPixel);
 }
