@@ -32,6 +32,10 @@ private slots:
 
     void on_spinCount_valueChanged(int arg1);
 
+    void on_btnBackground_clicked();
+
+    void on_btnLineColor_clicked();
+
 private:
     Ui::MainWindow *ui;
 
