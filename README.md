@@ -9,5 +9,5 @@ Use QT to draw geometric shapes.
 
 ## After adding cardioid:
 
-![image](https://user-images.githubusercontent.com/8750611/151754602-a8605f18-89d7-48e7-b975-4ca99e054b39.png)
+![image](https://user-images.githubusercontent.com/8750611/151755295-d43b946f-df0a-4f48-b7fc-f6b6667713a3.png)
 
