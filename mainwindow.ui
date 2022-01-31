@@ -79,7 +79,7 @@
       <item>
        <widget class="QPushButton" name="btnHypo">
         <property name="text">
-         <string>Hypo Cycloid</string>
+         <string>Hypocycloid</string>
         </property>
        </widget>
       </item>
