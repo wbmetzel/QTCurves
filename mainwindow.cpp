@@ -89,6 +89,22 @@ void MainWindow::on_btnEllipse_clicked()
     update_ui();
 }
 
+void MainWindow::on_btnFlower_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Flower);
+    this->ui->renderArea->repaint();
+
+    update_ui();
+}
+
+void MainWindow::on_btnStar_clicked()
+{
+    this->ui->renderArea->setShape(RenderArea::Star);
+    this->ui->renderArea->repaint();
+
+    update_ui();
+}
+
 void MainWindow::on_spinScale_valueChanged(double scale)
 {
     this->ui->renderArea->setScale(scale);

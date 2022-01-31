@@ -61,6 +61,16 @@ void RenderArea::on_shape_changed()
         mIntervalLength = 2 * M_PI;
         mStepCount = 256;
         break;
+    case Flower:
+        mScale = 10;
+        mIntervalLength = 12 * M_PI;
+        mStepCount = 512;
+        break;
+    case Star:
+        mScale = 25;
+        mIntervalLength = 6 * M_PI;
+        mStepCount = 256;
+        break;
     default: // Default to astroid for now
         mScale = 40;
         mIntervalLength = 2 * M_PI;
@@ -93,6 +103,12 @@ QPointF RenderArea::compute(float t)
         break;
     case Ellipse:
         return compute_ellipse(t);
+        break;
+    case Flower:
+        return compute_flower(t);
+        break;
+    case Star:
+        return compute_star(t);
         break;
     default:
         break;
@@ -159,6 +175,40 @@ QPointF RenderArea::compute_ellipse(float t)
     float a = 2;
     float b = 1.1;
     return QPointF(a * cos(t), b * sin(t));
+}
+
+/*
+ * Shape: Flower
+ * Equation:
+ *   x = a * cos(t) - b * cos(c * t)
+ *   y = a * sin(t) - b * sin(c * t)
+ */
+QPointF RenderArea::compute_flower(float t)
+{
+    float a = 11.0;
+    float b = 6.0;
+    float c = (a/b);
+    return QPointF(
+       a * cos(t) - b * cos(c * t),
+       a * sin(t) - b * sin(c * t)
+    );
+}
+
+/*
+ * Shape: Star
+ * Equation:
+ *   x = (R - r) * cos(t) + d * cos( ((R - r) / r ) * t )
+ *   y = (R - r) * sin(t) - d * sin( ((R - r) / r ) * t )
+ */
+QPointF RenderArea::compute_star(float t)
+{
+    float R = 5.0;
+    float r = 3.0;
+    float d = 5.0;
+    return QPointF(
+       (R - r) * cos(t) + d * cos( ((R - r) / r ) * t ),
+       (R - r) * sin(t) - d * sin( ((R - r) / r ) * t )
+    );
 }
 
 void RenderArea::paintEvent(QPaintEvent *event)

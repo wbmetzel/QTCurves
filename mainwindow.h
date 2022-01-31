@@ -40,6 +40,10 @@ private slots:
 
     void on_btnEllipse_clicked();
 
+    void on_btnFlower_clicked();
+
+    void on_btnStar_clicked();
+
 private:
     Ui::MainWindow *ui;
 

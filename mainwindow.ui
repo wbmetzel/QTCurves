@@ -105,6 +105,20 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="btnFlower">
+        <property name="text">
+         <string>Flower</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnStar">
+        <property name="text">
+         <string>Star</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label">
